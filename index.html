@@ -4,47 +4,178 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CricketLIVE! Official</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #02040a; color: white; font-family: 'Inter', sans-serif; margin: 0; overflow: hidden; }
-        .header { background: #000; border-bottom: 2px solid #d4af37; padding: 15px; text-align: center; }
-        .logo-box { border: 2px solid #d4af37; display: inline-block; padding: 5px 20px; border-radius: 10px; background: rgba(212, 175, 55, 0.1); }
-        .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+        body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; }
         
-        /* Full Screen Player Container */
-        .player-wrapper { height: calc(100vh - 85px); width: 100vw; position: relative; background: #000; }
-        iframe { width: 100%; height: 100%; border: none; }
+        .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
+
+        /* Premium Header Mask */
+        .header-mask {
+            width: 100%;
+            height: 140px; 
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100; 
+            border-bottom: 2px solid #d4af37;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .name-box {
+            display: flex;
+            align-items: center;
+            border: 2px solid #d4af37;
+            padding: 8px 20px;
+            border-radius: 10px;
+            background: rgba(212, 175, 55, 0.1);
+            animation: gold-glow 2s infinite alternate;
+        }
+
+        @keyframes gold-glow {
+            from { box-shadow: 0 0 5px #d4af37; }
+            to { box-shadow: 0 0 20px #d4af37; }
+        }
+
+        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
+        .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; margin: 0; }
+
+        .live-tag {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 15px;
+        }
+
+        .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* --- Perfect Hiding Logic (Updated for JioTV Web) --- */
+        .iframe-container { 
+            flex-grow: 1; 
+            position: relative; 
+            width: 100%; 
+            overflow: hidden; 
+            background: #000;
+        }
         
-        .full-btn { position: fixed; bottom: 20px; right: 20px; background: #d4af37; color: black; padding: 8px 15px; border-radius: 5px; font-weight: bold; z-index: 100; font-size: 12px; }
+        iframe { 
+            position: absolute;
+            /* Yahan humne top margin aur height ko JioTV web ke hisaab se adjust kiya hai */
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%; 
+            border: none;
+        }
+
+        /* Full Screen Button */
+        .full-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #d4af37;
+            color: black;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 12px;
+        }
+
+        /* Original WhatsApp Popup */
+        #my-whatsapp-popup {
+            position: fixed;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #111;
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 9999;
+            width: 85%;
+            max-width: 320px;
+            border: 2px solid #d4af37;
+            display: none;
+        }
+
+        .join-btn {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 50px;
+            display: block;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+        }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo-box">
-            <h1 class="brand-name">CricketLIVE! Official</h1>
+    <div class="main-wrapper" id="mainApp">
+        <div class="header-mask">
+            <div class="name-box">
+                <img src="logo.png" alt="Logo" class="channel-logo">
+                <h1 class="brand-name">CricketLIVE! Official</h1>
+            </div>
+            <div class="live-tag"><span class="dot"></span> LIVE MATCHES AVAILABLE</div>
         </div>
-    </header>
 
-    <div class="player-wrapper" id="mainApp">
-        <iframe 
-            src="https://cricketstan.github.io/Star-Sports-2-HD/" 
-            allowfullscreen="true" 
-            allow="autoplay; fullscreen">
-        </iframe>
+        <div class="iframe-container">
+            <iframe 
+                src="https://momixtv-jiotv.pages.dev/" 
+                allowfullscreen="true" 
+                webkitallowfullscreen="true" 
+                mozallowfullscreen="true"
+                allow="autoplay; fullscreen; picture-in-picture">
+            </iframe>
+        </div>
     </div>
 
     <button class="full-btn" onclick="toggleFS()">FULLSCREEN</button>
 
+    <div id="my-whatsapp-popup">
+        <h2 style="color:#d4af37; margin-top:0;">Join Community</h2>
+        <p style="font-size: 14px;">Original links aur updates ke liye hamara WhatsApp join karein.</p>
+        <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn">JOIN WHATSAPP NOW</a>
+        <p onclick="hideMyPopup()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Continue to Match</p>
+    </div>
+
     <script>
+        // Popup logic
+        setTimeout(function() {
+            document.getElementById('my-whatsapp-popup').style.display = 'block';
+        }, 5000);
+
+        function hideMyPopup() {
+            document.getElementById('my-whatsapp-popup').style.display = 'none';
+        }
+
+        // Fullscreen logic
         function toggleFS() {
             var elem = document.getElementById("mainApp");
             if (!document.fullscreenElement) {
-                elem.requestFullscreen().catch(err => { alert("Error!"); });
+                if (elem.requestFullscreen) { elem.requestFullscreen(); }
+                else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
             } else {
-                document.exitFullscreen();
+                if (document.exitFullscreen) { document.exitFullscreen(); }
             }
         }
     </script>
+
 </body>
 </html>

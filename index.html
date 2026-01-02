@@ -4,67 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CricketLIVE! Official</title>
-    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-
-        body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; }
+        body { background-color: #02040a; color: white; font-family: 'Inter', sans-serif; margin: 0; overflow: hidden; }
+        .header { background: #000; border-bottom: 2px solid #d4af37; padding: 15px; text-align: center; }
+        .logo-box { border: 2px solid #d4af37; display: inline-block; padding: 5px 20px; border-radius: 10px; background: rgba(212, 175, 55, 0.1); }
+        .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; }
         
-        .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
-
-        .header-mask {
-            width: 100%; height: 120px; background: #000; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 100; border-bottom: 2px solid #d4af37;
-        }
-
-        .name-box {
-            display: flex; align-items: center; border: 2px solid #d4af37; padding: 8px 20px;
-            border-radius: 10px; background: rgba(212, 175, 55, 0.1);
-        }
-
-        .brand-name { color: #d4af37; font-size: 18px; font-weight: bold; margin: 0; }
+        /* Full Screen Player Container */
+        .player-wrapper { height: calc(100vh - 85px); width: 100vw; position: relative; background: #000; }
+        iframe { width: 100%; height: 100%; border: none; }
         
-        .live-tag { margin-top: 8px; font-size: 11px; color: #fff; background: rgba(255, 255, 255, 0.1); padding: 3px 10px; border-radius: 15px; }
-        .dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 6px; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* Player Styling */
-        .video-container { flex-grow: 1; position: relative; width: 100%; background: #000; }
-        .video-js { width: 100% !important; height: 100% !important; }
-
-        .full-btn {
-            position: fixed; bottom: 20px; right: 20px; background: #d4af37; color: black;
-            border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; z-index: 1000;
-        }
+        .full-btn { position: fixed; bottom: 20px; right: 20px; background: #d4af37; color: black; padding: 8px 15px; border-radius: 5px; font-weight: bold; z-index: 100; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper" id="mainApp">
-        <div class="header-mask">
-            <div class="name-box">
-                <h1 class="brand-name">CricketLIVE! Official</h1>
-            </div>
-            <div class="live-tag"><span class="dot"></span> LIVE MATCHES AVAILABLE</div>
+    <header class="header">
+        <div class="logo-box">
+            <h1 class="brand-name">CricketLIVE! Official</h1>
         </div>
+    </header>
 
-        <div class="video-container">
-            <video id="my-video" class="video-js vjs-big-play-centered" controls preload="auto" data-setup='{}'>
-                <source src="https://momixtv-jiotv.pages.dev/jioplayer?id=1141" type="application/x-mpegURL">
-            </video>
-        </div>
+    <div class="player-wrapper" id="mainApp">
+        <iframe 
+            src="https://cricketstan.github.io/Star-Sports-2-HD/" 
+            allowfullscreen="true" 
+            allow="autoplay; fullscreen">
+        </iframe>
     </div>
 
     <button class="full-btn" onclick="toggleFS()">FULLSCREEN</button>
 
-    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
     <script>
         function toggleFS() {
             var elem = document.getElementById("mainApp");
             if (!document.fullscreenElement) {
-                elem.requestFullscreen().catch(err => {
-                    alert(`Error: ${err.message}`);
-                });
+                elem.requestFullscreen().catch(err => { alert("Error!"); });
             } else {
                 document.exitFullscreen();
             }

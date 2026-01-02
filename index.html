@@ -11,10 +11,10 @@
         
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* Premium Header Mask */
+        /* Premium Header */
         .header-mask {
             width: 100%;
-            height: 140px; 
+            height: 120px; 
             background: #000;
             display: flex;
             flex-direction: column;
@@ -23,7 +23,6 @@
             z-index: 100; 
             border-bottom: 2px solid #d4af37;
             flex-shrink: 0;
-            position: relative;
         }
 
         .name-box {
@@ -33,53 +32,50 @@
             padding: 8px 20px;
             border-radius: 10px;
             background: rgba(212, 175, 55, 0.1);
-            animation: gold-glow 2s infinite alternate;
         }
 
-        @keyframes gold-glow {
-            from { box-shadow: 0 0 5px #d4af37; }
-            to { box-shadow: 0 0 20px #d4af37; }
-        }
-
-        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
         .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; margin: 0; }
 
-        .live-tag {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 15px;
-        }
-
-        .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        /* --- Perfect Hiding Logic --- */
+        /* --- Iframe Container (Hiding Logic) --- */
         .iframe-container { 
             flex-grow: 1; 
             position: relative; 
             width: 100%; 
-            overflow: hidden; 
+            overflow: hidden; /* Bahar ka hissa chhupane ke liye */
             background: #000;
         }
         
         iframe { 
             position: absolute;
-            top: -75px; /* Isse CrickCast ka header poora upar nikal jayega */
+            /* Yahan pixels ko adjust karein agar CrickCast ka header abhi bhi dikhe */
+            top: -110px; 
             left: 0;
             width: 100%; 
-            height: calc(100% + 75px); /* Height ko adjust kiya taaki niche gap na aaye */
+            /* Height ko badhana hoga taaki niche ka content cut na ho */
+            height: calc(100% + 110px); 
             border: none;
         }
-        /* --------------------------- */
 
+        /* Full Screen Button Style */
+        .fullscreen-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(212, 175, 55, 0.8);
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            font-family: sans-serif;
+        }
+
+        /* Whatsapp Popup (Same as yours) */
         #my-whatsapp-popup {
             position: fixed;
-            top: 55%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             background: #111;
@@ -93,58 +89,60 @@
             border: 2px solid #d4af37;
             display: none;
         }
-
-        .join-btn {
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 50px;
-            display: block;
-            font-weight: bold;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
-        }
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper">
+    <div class="main-wrapper" id="mainContent">
         <div class="header-mask">
             <div class="name-box">
-                <img src="logo.png" alt="Logo" class="channel-logo">
                 <h1 class="brand-name">CricketLIVE! Official</h1>
             </div>
-            <div class="live-tag"><span class="dot"></span> LIVE MATCHES AVAILABLE</div>
         </div>
 
         <div class="iframe-container">
             <iframe 
+                id="matchFrame"
                 src="https://crickcast-fancode.vercel.app/" 
                 allowfullscreen="true" 
                 webkitallowfullscreen="true" 
                 mozallowfullscreen="true"
-                allow="autoplay; fullscreen; picture-in-picture">
+                allow="autoplay; fullscreen;">
             </iframe>
         </div>
     </div>
 
+    <button class="fullscreen-btn" onclick="toggleFullScreen()">FULL SCREEN</button>
+
     <div id="my-whatsapp-popup">
         <h2 style="color:#d4af37; margin-top:0;">Join Community</h2>
-        <p style="font-size: 14px;">Original links aur updates ke liye hamara WhatsApp join karein.</p>
-        <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn">JOIN WHATSAPP NOW</a>
-        <p onclick="hideMyPopup()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Continue to Match</p>
+        <p>Original links ke liye WhatsApp join karein.</p>
+        <a href="YOUR_LINK" target="_blank" style="background:#25D366; color:#fff; text-decoration:none; padding:10px; display:block; border-radius:10px;">JOIN NOW</a>
+        <p onclick="hideMyPopup()" style="cursor:pointer; margin-top:15px; font-size:12px;">Close</p>
     </div>
 
     <script>
-        setTimeout(function() {
-            document.getElementById('my-whatsapp-popup').style.display = 'block';
-        }, 5000);
+        // Popup Logic
+        setTimeout(() => { document.getElementById('my-whatsapp-popup').style.display = 'block'; }, 5000);
+        function hideMyPopup() { document.getElementById('my-whatsapp-popup').style.display = 'none'; }
 
-        function hideMyPopup() {
-            document.getElementById('my-whatsapp-popup').style.display = 'none';
+        // Full Screen Logic
+        function toggleFullScreen() {
+            var elem = document.getElementById("mainContent");
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) { /* Safari */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE11 */
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
         }
     </script>
-
 </body>
 </html>

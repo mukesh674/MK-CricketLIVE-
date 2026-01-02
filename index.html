@@ -2,45 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRICKETLIVE! OFFICIAL</title>
+    <title>MK CRICKET LIVE - DYNAMIC</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.3.5/dist/controls.css">
     <style>
-        body { margin: 0; background: #000; font-family: sans-serif; color: #00fbff; display: flex; flex-direction: column; align-items: center; }
-        .header { padding: 20px; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px #00fbff; }
-        #video-container { width: 100%; max-width: 800px; border: 2px solid #00fbff; box-shadow: 0 0 20px rgba(0,251,255,0.3); }
-        video { width: 100%; height: auto; }
+        body { margin: 0; background: #000; color: #00fbff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        #player-container { width: 100%; max-width: 900px; border: 2px solid #00fbff; background: #111; }
+        video { width: 100%; height: auto; display: block; }
+        .info { margin-top: 15px; font-size: 14px; color: #aaa; text-align: center; padding: 0 10px; }
     </style>
 </head>
 <body>
-    <div class="header">CRICKETLIVE! OFFICIAL</div>
-    <div id="video-container" data-shaka-player-container>
-        <video id="video" data-shaka-player autoplay poster="https://via.placeholder.com/800x450/000000/00fbff?text=Connecting+to+Stream..."></video>
+
+    <div id="player-container" data-shaka-player-container>
+        <video id="video" data-shaka-player autoplay></video>
     </div>
+    <div class="info">Auto-Configured for MK Live Streaming</div>
 
     <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.3.5/dist/shaka-player.compiled.debug.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.3.5/dist/shaka-player.ui.js"></script>
 
     <script>
-        async function init() {
+        async function initDynamicPlayer() {
+            // URL se parameters nikalne ke liye
+            const urlParams = new URLSearchParams(window.location.search);
+            const streamUrl = urlParams.get('id'); // 'id' parameter se MPD link
+            const keyPair = urlParams.get('key');  // 'key' parameter se ID:KEY
+
+            if (!streamUrl || !keyPair) {
+                alert("Please provide ID and KEY in the URL!");
+                return;
+            }
+
+            const [keyId, keyVal] = keyPair.split(':');
             const video = document.getElementById('video');
             const ui = video['ui'];
             const player = ui.getControls().getPlayer();
 
             player.configure({
                 drm: {
-                    clearKeys: {
-                        '1779c27b9d077a3ba0c9cc1bb9a94b9f': 'cc5cf3b7928fb9e0a1ee6a8b566f0a8e'
-                    }
+                    clearKeys: { [keyId]: keyVal }
                 }
             });
 
             try {
-                // Agar direct na chale to hum proxy add kar sakte hain
-                await player.load('https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/clients/dash/enc/f60kqesunw/out/v1/a435ed7a00f947deb4369b46d8f2fb70/cenc.mpd');
-            } catch (e) { console.error('Error:', e); }
+                // Proxy use kar rahe hain taaki block na ho
+                const finalUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(streamUrl);
+                await player.load(finalUrl);
+            } catch (e) { console.error("Error:", e); }
         }
-        document.addEventListener('shaka-ui-loaded', init);
+
+        document.addEventListener('shaka-ui-loaded', initDynamicPlayer);
     </script>
 </body>
 </html>

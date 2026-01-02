@@ -12,70 +12,65 @@
         
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* --- Updated Header (No Bottom Line) --- */
+        /* --- Header Section --- */
         .header-mask {
             width: 100%;
-            height: 150px; 
+            height: 160px; 
             background: #000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 100; 
-            border: none; /* Line removed */
+            z-index: 100;
         }
 
-        /* Premium Gold & Silver Mix Box */
+        /* Bada Premium Gold & Silver Box */
         .name-box {
             display: flex;
             align-items: center;
-            padding: 8px 18px;
-            border-radius: 12px;
+            padding: 12px 25px; /* Size badhaya gaya */
+            border-radius: 15px;
             position: relative;
-            border: 2px solid transparent;
-            /* Gold to Silver Gradient Border */
+            border: 2.5px solid transparent;
             background-image: linear-gradient(#000, #000), 
                               linear-gradient(135deg, #d4af37 0%, #ffffff 50%, #d4af37 100%);
             background-origin: border-box;
             background-clip: padding-box, border-box;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-            max-width: 92%;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+            max-width: 95%; /* Screen par set rahega */
         }
 
         .channel-logo { 
-            width: 32px; 
-            height: 32px; 
-            margin-right: 12px; 
+            width: 40px; 
+            height: 40px; 
+            margin-right: 15px; 
             border-radius: 50%; 
-            border: 1.5px solid #fff;
+            border: 2px solid #fff;
         }
 
         .brand-name { 
             font-family: 'Orbitron', sans-serif;
-            font-size: 17px; 
+            font-size: 22px; /* Text size badhaya gaya */
             font-weight: 700; 
             margin: 0;
-            white-space: nowrap;
+            white-space: nowrap; /* Ek hi line mein rahega */
             background: linear-gradient(90deg, #00f2ff 0%, #bc00ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-        }
-
-        .live-tag {
-            margin-top: 12px;
-            font-size: 10px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 4px 12px;
-            border-radius: 15px;
             letter-spacing: 1px;
         }
 
-        .dot { height: 6px; width: 6px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .live-tag {
+            margin-top: 15px;
+            font-size: 11px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
 
         /* --- Content Area --- */
         .content-area {
@@ -88,46 +83,72 @@
             padding: 20px;
         }
 
-        /* Slightly Smaller Watch Button */
         .watch-button {
             background: linear-gradient(90deg, #00f2ff, #bc00ff);
             color: #fff;
             text-decoration: none;
-            padding: 14px 40px; /* Thoda size chhota kiya */
+            padding: 14px 45px;
             font-size: 19px; 
             font-weight: bold;
             border-radius: 50px;
-            box-shadow: 0 8px 25px rgba(0, 242, 255, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 242, 255, 0.3);
             display: inline-block;
-            transition: transform 0.3s;
+            transition: 0.3s;
             text-transform: uppercase;
             font-family: 'Orbitron', sans-serif;
         }
 
-        .watch-button:active { transform: scale(0.95); }
-
+        /* --- Updated Info Box with Gradient Border --- */
         .info-box-new {
-            margin-top: 25px;
-            width: 85%;
-            max-width: 360px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px dashed rgba(212, 175, 55, 0.5);
+            margin-top: 30px;
+            width: 88%;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 18px;
             border-radius: 12px;
-            padding: 15px;
+            position: relative;
+            border: 2px solid transparent;
+            /* Watch Now jaisa gradient border */
+            background-image: linear-gradient(#0b0b0b, #0b0b0b), 
+                              linear-gradient(90deg, #00f2ff, #bc00ff);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
         }
 
-        .info-box-new h3 {
-            color: #d4af37;
-            font-size: 14px;
-            margin: 0 0 5px 0;
+        .info-title {
+            color: #00f2ff;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             font-family: 'Orbitron', sans-serif;
         }
 
-        .info-box-new p {
+        /* Chamakta hua Red Dot */
+        .red-dot {
+            height: 8px;
+            width: 8px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-red 1s infinite;
+            box-shadow: 0 0 10px #ff0000;
+        }
+
+        @keyframes pulse-red {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        .info-desc {
             color: #ccc;
-            font-size: 12px;
+            font-size: 12.5px;
             margin: 0;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         /* --- WhatsApp Popup --- */
@@ -180,17 +201,24 @@
                 <img src="logo.png" alt="Logo" class="channel-logo">
                 <h1 class="brand-name">CricketLIVE! Official</h1>
             </div>
-            <div class="live-tag"><span class="dot"></span> SERVER ONLINE</div>
+            <div class="live-tag">
+                <span style="height:6px; width:6px; background:#ff0000; border-radius:50%; margin-right:8px; animation:blink 1s infinite;"></span> 
+                SERVER ONLINE
+            </div>
         </div>
 
         <div class="content-area">
             <a href="https://share.google/T98FJe93fB6BLzQgz" target="_self" class="watch-button">
-                 WATCH LIVE NOW
+                🚀 WATCH LIVE NOW
             </a>
 
             <div class="info-box-new">
-                <h3>STAY UPDATED</h3>
-                <p>Real-time Cricket News, Live Match Links, and Fastest Updates. Follow our official channel!</p>
+                <div class="info-title">
+                    <span class="red-dot"></span> STAY UPDATED
+                </div>
+                <p class="info-desc">
+                    Get Real-time Cricket News, Live Match Links, and Fastest Updates. Follow our official channel now!
+                </p>
             </div>
         </div>
     </div>
@@ -199,7 +227,7 @@
         <div class="join-header">
             <i class="fab fa-whatsapp"></i> Join Community
         </div>
-        <p style="font-size: 13px; color: #ccc;">Join for original links and instant cricket notifications.</p>
+        <p style="font-size: 13px; color: #ccc;">Join for original HD links and instant cricket notifications.</p>
         <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn">JOIN WHATSAPP NOW</a>
         <p onclick="hideMyPopup()" style="font-size:11px; color:#666; cursor:pointer; margin-top:15px; text-decoration:underline;">I have joined</p>
     </div>

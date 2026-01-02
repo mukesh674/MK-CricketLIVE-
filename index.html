@@ -1,59 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="referrer" content="no-referrer">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MK CRICKET LIVE - DYNAMIC</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.3.5/dist/controls.css">
+    <title>MK Live Streaming</title>
     <style>
-        body { margin: 0; background: #000; color: #00fbff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        #player-container { width: 100%; max-width: 900px; border: 2px solid #00fbff; background: #111; }
-        video { width: 100%; height: auto; display: block; }
-        .info { margin-top: 15px; font-size: 14px; color: #aaa; text-align: center; padding: 0 10px; }
+        body { margin: 0; padding: 0; overflow: hidden; }
+        iframe { width: 100vw; height: 100vh; border: none; }
     </style>
 </head>
 <body>
-
-    <div id="player-container" data-shaka-player-container>
-        <video id="video" data-shaka-player autoplay></video>
-    </div>
-    <div class="info">Auto-Configured for MK Live Streaming</div>
-
-    <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.3.5/dist/shaka-player.compiled.debug.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.3.5/dist/shaka-player.ui.js"></script>
-
-    <script>
-        async function initDynamicPlayer() {
-            // URL se parameters nikalne ke liye
-            const urlParams = new URLSearchParams(window.location.search);
-            const streamUrl = urlParams.get('id'); // 'id' parameter se MPD link
-            const keyPair = urlParams.get('key');  // 'key' parameter se ID:KEY
-
-            if (!streamUrl || !keyPair) {
-                alert("Please provide ID and KEY in the URL!");
-                return;
-            }
-
-            const [keyId, keyVal] = keyPair.split(':');
-            const video = document.getElementById('video');
-            const ui = video['ui'];
-            const player = ui.getControls().getPlayer();
-
-            player.configure({
-                drm: {
-                    clearKeys: { [keyId]: keyVal }
-                }
-            });
-
-            try {
-                // Proxy use kar rahe hain taaki block na ho
-                const finalUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(streamUrl);
-                await player.load(finalUrl);
-            } catch (e) { console.error("Error:", e); }
-        }
-
-        document.addEventListener('shaka-ui-loaded', initDynamicPlayer);
-    </script>
+    <iframe src="https://crickcast-fancode.vercel.app/"></iframe>
 </body>
 </html>

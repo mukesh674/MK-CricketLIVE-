@@ -69,11 +69,11 @@
         
         iframe { 
             position: absolute;
-            /* Isse CrickCast ka header aur Language selection gayab hoga */
+            /* Header aur Baki buttons ko hatane ke liye top adjust kiya hai */
             top: -165px; 
             left: 0;
             width: 100%; 
-            /* Height ko aise adjust kiya hai taaki niche ka share/telegram button cut jaye */
+            /* Niche ka Telegram button katne ke liye height adjust ki hai */
             height: calc(100% + 155px); 
             border: none;
         }
@@ -138,7 +138,8 @@
 
         <div class="iframe-container">
             <iframe 
-                src="https://crickcast-fancode.vercel.app/" 
+                id="matchFrame"
+                src="https://crickcast-fancode.vercel.app/bbl" 
                 allowfullscreen="true" 
                 webkitallowfullscreen="true" 
                 mozallowfullscreen="true"
@@ -157,7 +158,15 @@
     </div>
 
     <script>
-        // Popup logic
+        // Check for URL parameter first, if not use default BBL link
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const matchLink = params.get('match');
+            if (matchLink) {
+                document.getElementById('matchFrame').src = decodeURIComponent(matchLink);
+            }
+        };
+
         setTimeout(function() {
             document.getElementById('my-whatsapp-popup').style.display = 'block';
         }, 5000);
@@ -166,7 +175,6 @@
             document.getElementById('my-whatsapp-popup').style.display = 'none';
         }
 
-        // Fullscreen logic
         function toggleFS() {
             var elem = document.getElementById("mainApp");
             if (!document.fullscreenElement) {

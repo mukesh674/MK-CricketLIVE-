@@ -9,190 +9,29 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;700&family=Montserrat:ital,wght@1,500&display=swap');
 
         body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; }
-        
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* --- Header Section --- */
-        .header-mask {
-            width: 100%;
-            height: 140px; 
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
+        /* Header Section */
+        .header-mask { width: 100%; height: 140px; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100; }
+        .name-box { display: flex; align-items: center; padding: 10px 20px; border-radius: 12px; border: 2px solid transparent; background-image: linear-gradient(#000, #000), linear-gradient(135deg, #d4af37 0%, #ffffff 50%, #d4af37 100%); background-origin: border-box; background-clip: padding-box, border-box; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); max-width: 85%; }
+        .brand-name { font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 700; margin: 0; white-space: nowrap; background: linear-gradient(90deg, #00f2ff 0%, #bc00ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; }
 
-        /* Adjusted Brand Box Size */
-        .name-box {
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
-            border-radius: 12px;
-            position: relative;
-            border: 2px solid transparent;
-            background-image: linear-gradient(#000, #000), 
-                              linear-gradient(135deg, #d4af37 0%, #ffffff 50%, #d4af37 100%);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-            max-width: 85%; /* Perfectly fits on screen */
-        }
+        /* Content Area */
+        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .watch-button { background: linear-gradient(90deg, #00f2ff, #bc00ff); color: #fff; text-decoration: none; padding: 14px 40px; font-size: 18px; font-weight: bold; border-radius: 50px; box-shadow: 0 8px 25px rgba(0, 242, 255, 0.3); border: none; cursor: pointer; font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
 
-        .channel-logo { 
-            width: 30px; 
-            height: 30px; 
-            margin-right: 12px; 
-            border-radius: 50%; 
-            border: 1.5px solid #fff;
-        }
+        /* Info Box */
+        .info-box-new { margin-top: 25px; width: 88%; max-width: 380px; background: rgba(255, 255, 255, 0.03); padding: 15px; border-radius: 12px; border: 2px solid transparent; background-image: linear-gradient(#0b0b0b, #0b0b0b), linear-gradient(90deg, #00f2ff, #bc00ff); background-origin: border-box; background-clip: padding-box, border-box; }
+        .red-dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; display: inline-block; animation: pulse-red 1s infinite; margin-right: 8px; }
+        @keyframes pulse-red { 0%, 100% { transform: scale(0.9); opacity: 0.7; } 50% { transform: scale(1.2); opacity: 1; } }
 
-        .brand-name { 
-            font-family: 'Orbitron', sans-serif;
-            font-size: 16px; /* Optimized size for screen fit */
-            font-weight: 700; 
-            margin: 0;
-            white-space: nowrap;
-            background: linear-gradient(90deg, #00f2ff 0%, #bc00ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .live-tag {
-            margin-top: 12px;
-            font-size: 10px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 4px 12px;
-            border-radius: 15px;
-        }
-
-        /* --- Content Area --- */
-        .content-area {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .watch-button {
-            background: linear-gradient(90deg, #00f2ff, #bc00ff);
-            color: #fff;
-            text-decoration: none;
-            padding: 14px 40px;
-            font-size: 18px; 
-            font-weight: bold;
-            border-radius: 50px;
-            box-shadow: 0 8px 25px rgba(0, 242, 255, 0.3);
-            display: inline-block;
-            text-transform: uppercase;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .info-box-new {
-            margin-top: 25px;
-            width: 88%;
-            max-width: 380px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 15px;
-            border-radius: 12px;
-            position: relative;
-            border: 2px solid transparent;
-            background-image: linear-gradient(#0b0b0b, #0b0b0b), 
-                              linear-gradient(90deg, #00f2ff, #bc00ff);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-        }
-
-        .info-title {
-            color: #00f2ff;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .red-dot {
-            height: 7px;
-            width: 7px;
-            background-color: #ff0000;
-            border-radius: 50%;
-            animation: pulse-red 1s infinite;
-            box-shadow: 0 0 8px #ff0000;
-        }
-
-        @keyframes pulse-red {
-            0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(0.9); opacity: 0.7; }
-        }
-
-        .info-desc {
-            color: #ccc;
-            font-size: 12px;
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        /* --- WhatsApp Popup Updated Font/Color --- */
-        #my-whatsapp-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #111;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            z-index: 9999;
-            width: 80%;
-            max-width: 300px;
-            border: 2px solid #d4af37;
-            display: none;
-        }
-
-        .join-header {
-            color: #fff;
-            font-size: 18px;
-            font-family: 'Orbitron', sans-serif;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .join-header i { color: #25D366; }
-
-        .popup-desc {
-            font-family: 'Montserrat', sans-serif; /* New Stylist Font */
-            font-style: italic;
-            font-size: 13px; 
-            color: #00f2ff; /* New Cyan Color */
-            margin-bottom: 15px;
-        }
-
-        .join-btn {
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 50px;
-            display: block;
-            font-weight: bold;
-        }
+        /* Popups Style */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 10000; }
+        .custom-popup { background: #111; padding: 25px; border-radius: 20px; text-align: center; width: 85%; max-width: 320px; border: 2px solid #bc00ff; box-shadow: 0 0 30px rgba(188, 0, 255, 0.2); }
+        .popup-title { font-family: 'Orbitron', sans-serif; color: #00f2ff; margin-bottom: 15px; font-size: 18px; }
+        .popup-text { font-size: 13px; color: #ccc; margin-bottom: 20px; line-height: 1.5; }
+        .btn-join { background: #25D366; color: #fff; text-decoration: none; padding: 12px; border-radius: 50px; display: block; font-weight: bold; margin-bottom: 10px; }
+        .btn-open { background: transparent; color: #00f2ff; border: 1px solid #00f2ff; padding: 10px; border-radius: 50px; display: block; font-weight: bold; cursor: pointer; width: 100%; font-family: 'Poppins'; }
     </style>
 </head>
 <body>
@@ -200,47 +39,57 @@
     <div class="main-wrapper">
         <div class="header-mask">
             <div class="name-box">
-                <img src="logo.png" alt="Logo" class="channel-logo">
+                <img src="logo.png" alt="Logo" style="width:30px; margin-right:12px; border-radius:50%;">
                 <h1 class="brand-name">CricketLIVE! Official</h1>
             </div>
-            <div class="live-tag">
-                <span style="height:5px; width:5px; background:#ff0000; border-radius:50%; margin-right:8px; animation:blink 1s infinite;"></span> 
-                SERVER ONLINE
-            </div>
+            <div style="color:#fff; font-size:10px; margin-top:10px;"><span style="color:#ff0000;"></span> SERVER ONLINE</div>
         </div>
 
         <div class="content-area">
-            <a href="https://share.google/T98FJe93fB6BLzQgz" target="_self" class="watch-button">
-                 WATCH LIVE NOW
-            </a>
+            <button onclick="showLinkLocker()" class="watch-button"> WATCH LIVE NOW</button>
 
             <div class="info-box-new">
-                <div class="info-title">
+                <div style="color:#00f2ff; font-weight:bold; font-size:14px; font-family:'Orbitron'; margin-bottom:5px;">
                     <span class="red-dot"></span> STAY UPDATED
                 </div>
-                <p class="info-desc">
-                    Get Real-time Cricket News, Live Match Links, and Fastest Updates. Follow our official channel now!
-                </p>
+                <p style="color:#ccc; font-size:12px; margin:0;">Follow our channel for original HD links and fastest cricket updates.</p>
             </div>
         </div>
     </div>
 
-    <div id="my-whatsapp-popup">
-        <div class="join-header">
-            <i class="fab fa-whatsapp"></i> Join Community
+    <div id="link-locker" class="modal-overlay">
+        <div class="custom-popup">
+            <div class="popup-title">Link Locked! </div>
+            <p class="popup-text">Match dekhne ke liye hamara WhatsApp channel join karna zaroori hai.</p>
+            <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="btn-join"><i class="fab fa-whatsapp"></i> JOIN CHANNEL</a>
+            <button onclick="openMatchLink()" class="btn-open">Already Joined (Open Link)</button>
         </div>
-        <p class="popup-desc">Join for original HD links and instant cricket notifications.</p>
-        <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn">JOIN WHATSAPP NOW</a>
-        <p onclick="hideMyPopup()" style="font-size:11px; color:#666; cursor:pointer; margin-top:15px; text-decoration:underline;">I have joined</p>
+    </div>
+
+    <div id="welcome-popup" class="modal-overlay" style="display: flex;">
+        <div class="custom-popup" style="border-color: #d4af37;">
+            <div class="popup-title" style="color:#d4af37;">Welcome!</div>
+            <p class="popup-text" style="color:#00f2ff; font-family:'Montserrat'; font-style:italic;">Join for original HD links and instant cricket notifications.</p>
+            <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="btn-join">JOIN WHATSAPP NOW</a>
+            <button onclick="hideWelcome()" style="background:none; border:none; color:#666; text-decoration:underline; font-size:11px; margin-top:10px; cursor:pointer;">Continue to Website</button>
+        </div>
     </div>
 
     <script>
-        window.onload = function() {
-            document.getElementById('my-whatsapp-popup').style.display = 'block';
-        };
+        // Website khulte hi aane wala popup hide karna
+        function hideWelcome() {
+            document.getElementById('welcome-popup').style.display = 'none';
+        }
 
-        function hideMyPopup() {
-            document.getElementById('my-whatsapp-popup').style.display = 'none';
+        // Watch Now click karne par locker dikhana
+        function showLinkLocker() {
+            document.getElementById('link-locker').style.display = 'flex';
+        }
+
+        // Final Match Link kholna
+        function openMatchLink() {
+            // Yahan apni match link daalein
+            window.location.href = "https://share.google/T98FJe93fB6BLzQgz";
         }
     </script>
 

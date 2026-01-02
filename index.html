@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CricketLIVE! Official</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
         body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; }
         
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* Premium Header with Logo */
+        /* Premium Header */
         .header-mask {
             width: 100%;
             height: 140px; 
@@ -55,8 +55,9 @@
         }
 
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* Full Screen Content Area */
+        /* Content Area */
         .content-area {
             flex-grow: 1;
             display: flex;
@@ -64,23 +65,69 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: #000;
+            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+            padding: 20px;
         }
 
         .watch-button {
             background: #d4af37;
             color: #000;
             text-decoration: none;
-            padding: 18px 40px;
-            font-size: 20px;
+            padding: 18px 45px;
+            font-size: 22px;
             font-weight: bold;
             border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
             display: inline-block;
             transition: 0.3s;
+            text-transform: uppercase;
+            border: 2px solid transparent;
         }
 
-        /* Original WhatsApp Popup Style */
+        .watch-button:active { transform: scale(0.95); }
+
+        /* --- New Premium Info Box --- */
+        .premium-info-box {
+            margin-top: 25px;
+            width: 90%;
+            max-width: 350px;
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-info-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            to { left: 100%; }
+        }
+
+        .info-title {
+            color: #d4af37;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .info-desc {
+            color: #ccc;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* WhatsApp Popup */
         #my-whatsapp-popup {
             position: fixed;
             top: 55%;
@@ -95,7 +142,7 @@
             width: 85%;
             max-width: 320px;
             border: 2px solid #d4af37;
-            display: none; /* JavaScript se control hoga */
+            display: none;
         }
 
         .join-btn {
@@ -107,7 +154,6 @@
             display: block;
             font-weight: bold;
             margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
         }
     </style>
 </head>
@@ -123,25 +169,29 @@
         </div>
 
         <div class="content-area">
-            <p style="color: #eee; margin-bottom: 20px;">Live Match dekhne ke liye niche click karein:</p>
-            
             <a href="https://share.google/T98FJe93fB6BLzQgz" target="_self" class="watch-button">
-                🚀 WATCH LIVE NOW
+                 WATCH LIVE NOW
             </a>
-            
-            <p style="color: #666; font-size: 11px; margin-top: 30px;">Direct streaming link updated.</p>
+
+            <div class="premium-info-box">
+                <span class="info-title"> FASTEST UPDATES</span>
+                <p class="info-desc">
+                    Cricket ki har khabar aur sabse tez match links ke liye hamare official channel ko zaroor follow karein!
+                </p>
+            </div>
+
+            <p style="color: #666; font-size: 10px; margin-top: 20px;">Clicking will open match in this tab</p>
         </div>
     </div>
 
     <div id="my-whatsapp-popup">
         <h2 style="color:#d4af37; margin-top:0;">Join Community</h2>
-        <p style="font-size: 14px;">Original links aur fast updates ke liye hamara WhatsApp channel join karein.</p>
+        <p style="font-size: 14px;">Original links aur fast updates ke liye hamara WhatsApp join karein.</p>
         <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn">JOIN WHATSAPP NOW</a>
         <p onclick="hideMyPopup()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Continue to Match</p>
     </div>
 
     <script>
-        // Website open hote hi Popup turant dikhane ke liye (0 ms delay)
         window.onload = function() {
             document.getElementById('my-whatsapp-popup').style.display = 'block';
         };

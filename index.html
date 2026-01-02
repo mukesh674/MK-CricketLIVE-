@@ -11,10 +11,10 @@
         
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* Premium Header */
+        /* Premium Header Mask with Logo */
         .header-mask {
             width: 100%;
-            height: 120px; 
+            height: 130px; 
             background: #000;
             display: flex;
             flex-direction: column;
@@ -32,77 +32,86 @@
             padding: 8px 20px;
             border-radius: 10px;
             background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
 
+        /* Logo Wapis Add Kiya */
+        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
         .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; margin: 0; }
 
-        /* --- Iframe Container (Hiding Logic) --- */
+        .live-tag {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 15px;
+            letter-spacing: 1px;
+        }
+
+        .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* --- Improved Hiding Logic (Telegram Button Chhupane ke liye) --- */
         .iframe-container { 
             flex-grow: 1; 
             position: relative; 
             width: 100%; 
-            overflow: hidden; /* Bahar ka hissa chhupane ke liye */
+            overflow: hidden; /* Ye zaruri hai niche ka button kaatne ke liye */
             background: #000;
         }
         
         iframe { 
             position: absolute;
-            /* Yahan pixels ko adjust karein agar CrickCast ka header abhi bhi dikhe */
-            top: -110px; 
+            /* Header Chhupane ke liye (Isko adjust karein) */
+            top: -160px; 
             left: 0;
             width: 100%; 
-            /* Height ko badhana hoga taaki niche ka content cut na ho */
-            height: calc(100% + 110px); 
+            /* Niche ka button chhupane ke liye height ko 100% se thoda kam rakha hai */
+            height: calc(100% + 150px); 
             border: none;
         }
 
-        /* Full Screen Button Style */
-        .fullscreen-btn {
+        /* Full Screen Button */
+        .fs-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(212, 175, 55, 0.8);
-            color: #000;
+            background: #d4af37;
+            color: black;
             border: none;
             padding: 10px 15px;
-            border-radius: 5px;
+            border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
             z-index: 1000;
-            font-family: sans-serif;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
-        /* Whatsapp Popup (Same as yours) */
         #my-whatsapp-popup {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #111;
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            z-index: 9999;
-            width: 85%;
-            max-width: 320px;
-            border: 2px solid #d4af37;
-            display: none;
+            top: 55%; left: 50%; transform: translate(-50%, -50%);
+            background: #111; color: white; padding: 30px; border-radius: 20px;
+            text-align: center; z-index: 9999; width: 85%; max-width: 320px;
+            border: 2px solid #d4af37; display: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper" id="mainContent">
+    <div class="main-wrapper" id="fullApp">
         <div class="header-mask">
             <div class="name-box">
+                <img src="logo.png" alt="Logo" class="channel-logo">
                 <h1 class="brand-name">CricketLIVE! Official</h1>
             </div>
+            <div class="live-tag"><span class="dot"></span> LIVE MATCHES</div>
         </div>
 
         <div class="iframe-container">
             <iframe 
-                id="matchFrame"
                 src="https://crickcast-fancode.vercel.app/" 
                 allowfullscreen="true" 
                 webkitallowfullscreen="true" 
@@ -112,37 +121,25 @@
         </div>
     </div>
 
-    <button class="fullscreen-btn" onclick="toggleFullScreen()">FULL SCREEN</button>
+    <button class="fs-btn" onclick="openFull()">FULL SCREEN</button>
 
     <div id="my-whatsapp-popup">
         <h2 style="color:#d4af37; margin-top:0;">Join Community</h2>
-        <p>Original links ke liye WhatsApp join karein.</p>
-        <a href="YOUR_LINK" target="_blank" style="background:#25D366; color:#fff; text-decoration:none; padding:10px; display:block; border-radius:10px;">JOIN NOW</a>
-        <p onclick="hideMyPopup()" style="cursor:pointer; margin-top:15px; font-size:12px;">Close</p>
+        <p style="font-size: 14px;">Updates ke liye WhatsApp join karein.</p>
+        <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" style="background:#25D366; color:white; text-decoration:none; padding:12px; display:block; border-radius:50px; font-weight:bold;">JOIN NOW</a>
+        <p onclick="hideMyPopup()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Continue</p>
     </div>
 
     <script>
-        // Popup Logic
         setTimeout(() => { document.getElementById('my-whatsapp-popup').style.display = 'block'; }, 5000);
         function hideMyPopup() { document.getElementById('my-whatsapp-popup').style.display = 'none'; }
 
-        // Full Screen Logic
-        function toggleFullScreen() {
-            var elem = document.getElementById("mainContent");
-            if (!document.fullscreenElement) {
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.webkitRequestFullscreen) { /* Safari */
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) { /* IE11 */
-                    elem.msRequestFullscreen();
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-            }
+        function openFull() {
+            let el = document.getElementById('fullApp');
+            if (el.requestFullscreen) el.requestFullscreen();
+            else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
         }
     </script>
+
 </body>
 </html>

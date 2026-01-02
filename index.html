@@ -11,7 +11,7 @@
         
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* Header with Logo */
+        /* Premium Header */
         .header-mask {
             width: 100%;
             height: 140px; 
@@ -56,28 +56,22 @@
 
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
 
-        /* Content Area */
-        .content-area {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        /* Full Page Iframe Container */
+        .iframe-container { 
+            flex-grow: 1; 
+            position: relative; 
+            width: 100%; 
+            overflow: hidden; 
             background: #000;
         }
-
-        .watch-button {
-            background: #d4af37;
-            color: #000;
-            text-decoration: none;
-            padding: 18px 40px;
-            font-size: 20px;
-            font-weight: bold;
-            border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
-            display: inline-block;
-            transition: 0.3s;
+        
+        iframe { 
+            position: absolute;
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%; 
+            border: none;
         }
 
         /* WhatsApp Popup */
@@ -107,6 +101,7 @@
             display: block;
             font-weight: bold;
             margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
         }
     </style>
 </head>
@@ -118,17 +113,17 @@
                 <img src="logo.png" alt="Logo" class="channel-logo">
                 <h1 class="brand-name">CricketLIVE! Official</h1>
             </div>
-            <div class="live-tag"><span class="dot"></span> SERVER ONLINE</div>
+            <div class="live-tag"><span class="dot"></span> LIVE MATCHES AVAILABLE</div>
         </div>
 
-        <div class="content-area">
-            <p style="color: #eee; margin-bottom: 20px;">Match dekhne ke liye button par click karein:</p>
-            
-            <a href="https://roko.chsport.site/fc/" target="_self" class="watch-button">
-                🚀 WATCH LIVE NOW
-            </a>
-            
-            <p style="color: #666; font-size: 11px; margin-top: 30px;">Clicking will open match in this tab</p>
+        <div class="iframe-container">
+            <iframe 
+                src="https://roko.chsport.site/fc/" 
+                allowfullscreen="true" 
+                webkitallowfullscreen="true" 
+                mozallowfullscreen="true"
+                allow="autoplay; fullscreen; picture-in-picture">
+            </iframe>
         </div>
     </div>
 
@@ -140,7 +135,7 @@
     </div>
 
     <script>
-        // Popup timing (4 seconds)
+        // WhatsApp Popup logic (Appears after 4 seconds)
         setTimeout(function() {
             document.getElementById('my-whatsapp-popup').style.display = 'block';
         }, 4000);

@@ -7,14 +7,12 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
-        body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; color: white; }
+        body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; }
         
-        .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* Premium Header */
+        /* Premium Header with Logo */
         .header-mask {
-            position: absolute;
-            top: 0;
             width: 100%;
             height: 140px; 
             background: #000;
@@ -22,7 +20,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            z-index: 100; 
             border-bottom: 2px solid #d4af37;
+            flex-shrink: 0;
         }
 
         .name-box {
@@ -32,37 +32,70 @@
             padding: 8px 20px;
             border-radius: 10px;
             background: rgba(212, 175, 55, 0.1);
+            animation: gold-glow 2s infinite alternate;
         }
 
-        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; }
+        @keyframes gold-glow {
+            from { box-shadow: 0 0 5px #d4af37; }
+            to { box-shadow: 0 0 20px #d4af37; }
+        }
+
+        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
         .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; margin: 0; }
 
-        /* Loading Spinner */
-        .loader {
-            border: 4px solid #333;
-            border-top: 4px solid #d4af37;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+        .live-tag {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 15px;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* WhatsApp Popup */
+        .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
+
+        /* Full Screen Content Area */
+        .content-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: #000;
+        }
+
+        .watch-button {
+            background: #d4af37;
+            color: #000;
+            text-decoration: none;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        /* Original WhatsApp Popup Style */
         #my-whatsapp-popup {
             position: fixed;
             top: 55%;
             left: 50%;
             transform: translate(-50%, -50%);
             background: #111;
+            color: white;
             padding: 30px;
             border-radius: 20px;
+            text-align: center;
             z-index: 9999;
             width: 85%;
             max-width: 320px;
             border: 2px solid #d4af37;
-            display: none;
+            display: none; /* JavaScript se control hoga */
         }
 
         .join-btn {
@@ -74,6 +107,7 @@
             display: block;
             font-weight: bold;
             margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
         }
     </style>
 </head>
@@ -85,35 +119,36 @@
                 <img src="logo.png" alt="Logo" class="channel-logo">
                 <h1 class="brand-name">CricketLIVE! Official</h1>
             </div>
+            <div class="live-tag"><span class="dot"></span> SERVER ONLINE</div>
         </div>
 
-        <div class="loader"></div>
-        <h2 style="color: #d4af37;">Connecting to Server...</h2>
-        <p>Please wait, redirecting to Live Match</p>
+        <div class="content-area">
+            <p style="color: #eee; margin-bottom: 20px;">Live Match dekhne ke liye niche click karein:</p>
+            
+            <a href="https://share.google/T98FJe93fB6BLzQgz" target="_self" class="watch-button">
+                🚀 WATCH LIVE NOW
+            </a>
+            
+            <p style="color: #666; font-size: 11px; margin-top: 30px;">Direct streaming link updated.</p>
+        </div>
     </div>
 
     <div id="my-whatsapp-popup">
-        <h2 style="color:#d4af37; margin:0;">Join Community</h2>
-        <p style="font-size: 14px;">Original links ke liye hamara WhatsApp join karein.</p>
+        <h2 style="color:#d4af37; margin-top:0;">Join Community</h2>
+        <p style="font-size: 14px;">Original links aur fast updates ke liye hamara WhatsApp channel join karein.</p>
         <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn">JOIN WHATSAPP NOW</a>
-        <p onclick="startRedirect()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Skip & Watch Match</p>
+        <p onclick="hideMyPopup()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Continue to Match</p>
     </div>
 
     <script>
-        // Popup dikhao
-        setTimeout(function() {
+        // Website open hote hi Popup turant dikhane ke liye (0 ms delay)
+        window.onload = function() {
             document.getElementById('my-whatsapp-popup').style.display = 'block';
-        }, 1000);
+        };
 
-        // Redirect function (Same tab mein kholega)
-        function startRedirect() {
-            window.location.href = "https://roko.chsport.site/fc/";
+        function hideMyPopup() {
+            document.getElementById('my-whatsapp-popup').style.display = 'none';
         }
-
-        // Agar user popup close na kare toh 5 sec baad auto-redirect
-        setTimeout(function() {
-            startRedirect();
-        }, 6000);
     </script>
 
 </body>

@@ -11,7 +11,7 @@
         
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* Header Fixed with Logo */
+        /* Header Mask */
         .header-mask {
             width: 100%; height: 130px; background: #000; display: flex; flex-direction: column;
             justify-content: center; align-items: center; z-index: 100; border-bottom: 2px solid #d4af37;
@@ -29,19 +29,18 @@
         .live-tag { margin-top: 8px; font-size: 11px; color: #fff; display: flex; align-items: center; background: rgba(255, 255, 255, 0.1); padding: 3px 10px; border-radius: 15px; }
         .dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
 
-        /* --- Optimized Cropping for Cricket Streaming --- */
+        /* --- Optimized Hiding for CricketStan Source --- */
         .iframe-container { 
             flex-grow: 1; position: relative; width: 100%; overflow: hidden; background: #000;
         }
         
         iframe { 
             position: absolute;
-            /* Header hatane ke liye top adjust kiya */
-            top: -70px; 
+            /* In values ko adjust kiya hai taaki extra headers chhup jayein */
+            top: -45px; 
             left: 0;
             width: 100%; 
-            /* Niche ka Telegram button chhupane ke liye height badhayi */
-            height: calc(100% + 65px); 
+            height: calc(100% + 45px); 
             border: none;
         }
 
@@ -51,7 +50,6 @@
             cursor: pointer; z-index: 1000; font-size: 11px;
         }
 
-        /* WhatsApp Popup (Original Style) */
         #my-whatsapp-popup {
             position: fixed; top: 55%; left: 50%; transform: translate(-50%, -50%);
             background: #111; color: white; padding: 30px; border-radius: 20px;
@@ -59,10 +57,7 @@
             border: 2px solid #d4af37; display: none;
         }
 
-        .join-btn {
-            background: #25D366; color: white; text-decoration: none; padding: 14px;
-            border-radius: 50px; display: block; font-weight: bold; margin-top: 20px;
-        }
+        .join-btn { background: #25D366; color: white; text-decoration: none; padding: 14px; border-radius: 50px; display: block; font-weight: bold; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -78,7 +73,7 @@
 
         <div class="iframe-container">
             <iframe 
-                src="https://crickcast-fancode.vercel.app/bbl" 
+                src="https://cricketstan.github.io/Star-Sports-2-HD/" 
                 allowfullscreen="true" 
                 webkitallowfullscreen="true" 
                 mozallowfullscreen="true"

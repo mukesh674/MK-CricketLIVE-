@@ -11,7 +11,7 @@
         
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* Premium Header Mask */
+        /* Premium Header */
         .header-mask {
             width: 100%; height: 130px; background: #000; display: flex; flex-direction: column;
             justify-content: center; align-items: center; z-index: 100; border-bottom: 2px solid #d4af37;
@@ -24,35 +24,35 @@
         }
 
         @keyframes gold-glow { from { box-shadow: 0 0 5px #d4af37; } to { box-shadow: 0 0 15px #d4af37; } }
+        
+        /* Logo Wapis Add Kiya */
         .channel-logo { width: 35px; height: 35px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
         .brand-name { color: #d4af37; font-size: 18px; font-weight: bold; margin: 0; }
+        
         .live-tag { margin-top: 8px; font-size: 11px; color: #fff; display: flex; align-items: center; background: rgba(255, 255, 255, 0.1); padding: 3px 10px; border-radius: 15px; }
         .dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* --- Optimized Hiding Logic for BBL --- */
+        /* --- New Adjusted Frame for Google Share Link --- */
         .iframe-container { 
             flex-grow: 1; position: relative; width: 100%; overflow: hidden; background: #000;
         }
         
         iframe { 
             position: absolute;
-            /* Isse upar ka unwanted header area kat jayega */
-            top: -130px; 
+            top: 0; /* Google link ke liye abhi 0 rakha hai taaki content dikhe */
             left: 0;
             width: 100%; 
-            /* Isse niche ka Telegram aur Share button screen ke bahar ho jayega */
-            height: calc(100% + 120px); 
+            height: 100%; 
             border: none;
         }
 
         .full-btn {
             position: fixed; bottom: 20px; right: 20px; background: #d4af37; color: black;
             border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold;
-            cursor: pointer; z-index: 1000; font-size: 11px; text-transform: uppercase;
+            cursor: pointer; z-index: 1000; font-size: 11px;
         }
 
-        /* Original WhatsApp Popup */
+        /* Original WhatsApp Popup Style */
         #my-whatsapp-popup {
             position: fixed; top: 55%; left: 50%; transform: translate(-50%, -50%);
             background: #111; color: white; padding: 30px; border-radius: 20px;
@@ -81,7 +81,7 @@
         <div class="iframe-container">
             <iframe 
                 id="matchFrame"
-                src="https://crickcast-fancode.vercel.app/bbl" 
+                src="https://share.google/T98FJe93fB6BLzQgz" 
                 allowfullscreen="true" 
                 webkitallowfullscreen="true" 
                 mozallowfullscreen="true"
@@ -90,7 +90,7 @@
         </div>
     </div>
 
-    <button class="full-btn" onclick="toggleFS()">Fullscreen</button>
+    <button class="full-btn" onclick="toggleFS()">FULLSCREEN</button>
 
     <div id="my-whatsapp-popup">
         <h2 style="color:#d4af37; margin-top:0;">Join Community</h2>
@@ -100,15 +100,7 @@
     </div>
 
     <script>
-        // Direct Link logic
-        window.onload = function() {
-            const params = new URLSearchParams(window.location.search);
-            const matchLink = params.get('match');
-            if (matchLink) {
-                document.getElementById('matchFrame').src = decodeURIComponent(matchLink);
-            }
-        };
-
+        // Popup delay
         setTimeout(function() { document.getElementById('my-whatsapp-popup').style.display = 'block'; }, 5000);
         function hideMyPopup() { document.getElementById('my-whatsapp-popup').style.display = 'none'; }
 

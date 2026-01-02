@@ -9,19 +9,18 @@
 
         body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; }
         
-        /* Full Screen Fix Container */
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
         /* Premium Header Mask */
         .header-mask {
             width: 100%;
-            height: 160px;
+            height: 140px; /* Thoda height kam kiya taaki video space bade */
             background: #000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 10; /* Z-index thoda kam kiya taaki full screen video iske upar aa sake */
+            z-index: 100; 
             border-bottom: 2px solid #d4af37;
             flex-shrink: 0;
         }
@@ -44,7 +43,6 @@
         .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
         .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; margin: 0; }
 
-        /* LIVE Indicator */
         .live-tag {
             margin-top: 10px;
             font-size: 12px;
@@ -59,17 +57,22 @@
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* Iframe Container Fix */
-        .iframe-container { flex-grow: 1; position: relative; width: 100%; height: 100%; overflow: hidden; }
+        /* --- Iframe Hiding Logic --- */
+        .iframe-container { 
+            flex-grow: 1; 
+            position: relative; 
+            width: 100%; 
+            overflow: hidden; /* Bahar ka content chhupane ke liye */
+        }
         
-        /* IMPORTANT: Added Full Screen Permissions */
         iframe { 
             width: 100%; 
-            height: 100%; 
+            height: calc(100% + 60px); /* 60px extra height taaki niche se black na dikhe */
             border: none;
+            margin-top: -55px; /* Isse CrickCast ka header upar chala jayega aur chhup jayega */
         }
+        /* --------------------------- */
 
-        /* WhatsApp Popup */
         #my-whatsapp-popup {
             position: fixed;
             top: 55%;
